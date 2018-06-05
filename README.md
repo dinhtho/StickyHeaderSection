@@ -1,3 +1,4 @@
-#StickyHeaderSection
+# StickyHeaderSection
 
-<img src="https://github.com/dinhtho/StickyHeaderDecoration/blob/master/image.png" width="500"/>
+## Source https://github.com/Muyangmin/StickyHeaderDecoration
+<img src="https://github.com/dinhtho/StickyHeaderSection/blob/master/image.png" width="500"/>
