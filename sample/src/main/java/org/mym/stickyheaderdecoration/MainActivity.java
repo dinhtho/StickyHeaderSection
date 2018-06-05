@@ -1,141 +1,109 @@
 package org.mym.stickyheaderdecoration;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-import org.mym.ui.decoration.library.SimpleTextHeader;
-import org.mym.ui.decoration.library.StickyHeaderAdapter;
+import org.mym.ui.decoration.library.Section;
 import org.mym.ui.decoration.library.StickyHeaderDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ItemAdapter mAdapter;
+    private Button btChange;
+    private MyAdapter mAdapter;
     private StickyHeaderDecoration mDecoration;
+    private List<Section<String, String>> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = ((RecyclerView) findViewById(R.id.main_recyclerView));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ItemAdapter();
-        recyclerView.setAdapter(mAdapter);
+        btChange = (Button) findViewById(R.id.bt_change);
 
-//        mDecoration = new StickyHeaderDecoration(mAdapter);
-        mDecoration = new StickyHeaderDecoration(new SimpleTextHeader() {
+        btChange.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected CharSequence getHeaderContent(int childPos) {
-                return "Header " + getHeaderId(childPos);
-            }
-
-            @Override
-            public long getHeaderId(int childAdapterPosition) {
-                return childAdapterPosition / 14;
+            public void onClick(View v) {
+                dataList.remove(0);
+                mAdapter.updateSectionList(dataList, mDecoration);
             }
         });
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<String> stringListA = new ArrayList<>();
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        stringListA.add("a");
+        Section<String, String> section1 = new Section<>("A", stringListA);
+
+        List<String> stringListB = new ArrayList<>();
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        stringListB.add("b");
+        Section<String, String> section2 = new Section<>("B", stringListB);
+
+        List<String> stringListC = new ArrayList<>();
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+        stringListC.add("c");
+
+        Section<String, String> section3 = new Section<>("C", stringListC);
+
+        List<String> stringListD = new ArrayList<>();
+        stringListD.add("d");
+        stringListD.add("d");
+        stringListD.add("d");
+        stringListD.add("d");
+        stringListD.add("d");
+        stringListD.add("d");
+        Section<String, String> section4 = new Section<>("D", stringListD);
+
+        dataList = new ArrayList<>();
+        dataList.add(section1);
+        dataList.add(section2);
+        dataList.add(section3);
+        dataList.add(section4);
+
+        mAdapter = new MyAdapter(dataList);
+        recyclerView.setAdapter(mAdapter);
+
+        mDecoration = new StickyHeaderDecoration(mAdapter);
         recyclerView.addItemDecoration(mDecoration);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_invalidate) {
-//            mDecoration.invalidate();
-            mAdapter.appendDataAndNotifyChanged();
-//            recyclerView.invalidate();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    class ItemHolder extends RecyclerView.ViewHolder {
-
-        TextView textView;
-
-        public ItemHolder(View itemView) {
-            super(itemView);
-            textView = ((TextView) itemView.findViewById(R.id.item_textView));
-        }
-
-        void displayData(int position) {
-            textView.setText("Item " + position);
-        }
-    }
-
-    class HeaderHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-
-        public HeaderHolder(View itemView) {
-            super(itemView);
-            textView = ((TextView) itemView.findViewById(R.id.header_textView));
-        }
-
-        void displayData(int position) {
-            textView.setText("Header " + position);
-        }
-    }
-
-    class ItemAdapter extends RecyclerView.Adapter<ItemHolder> implements
-            StickyHeaderAdapter<HeaderHolder> {
-
-        private int mItemCount = 30;
-
-        void appendDataAndNotifyChanged() {
-            mItemCount += 10;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_main, parent, false);
-            return new ItemHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ItemHolder holder, int position) {
-            holder.displayData(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mItemCount;
-        }
-
-        @Override
-        public long getHeaderId(int childAdapterPosition) {
-            return childAdapterPosition / 14;
-        }
-
-        @NonNull
-        @Override
-        public HeaderHolder onCreateHeaderViewHolder(ViewGroup parent) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_header, parent, false);
-            return new HeaderHolder(view);
-        }
-
-        @Override
-        public void onBindHeaderViewHolder(@NonNull HeaderHolder holder, int childAdapterPosition) {
-            holder.displayData((int) getHeaderId(childAdapterPosition));
-        }
     }
 }
