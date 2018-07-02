@@ -46,6 +46,7 @@ public class StickyHeaderDecoration extends RecyclerView.ItemDecoration {
      * Clear header cache. This is useful for adapter data set changes.
      */
     public void invalidate() {
+        headerIndexes = getHeaderIndexes(mAdapter.getSectionList());
         mHeaderCache.clear();
     }
 

@@ -11,6 +11,10 @@ public class Section<H, I> {
         this.itemList = itemList;
     }
 
+    public void setItemList(List<I> itemList) {
+        this.itemList = itemList;
+    }
+
     public H getHeader() {
         return Header;
     }
