@@ -14,9 +14,9 @@ import java.util.List;
 
 public class MyAdapter extends StickyHeaderAdapter<MyAdapter.ItemHolder, MyAdapter.HeaderHolder> {
     private List<?> itemList;
-    private List<? extends Section> sectionList;
+    private List<Section> sectionList;
 
-    public MyAdapter(List<? extends Section> sectionList) {
+    public MyAdapter(List<Section> sectionList) {
         super(sectionList);
         this.sectionList = sectionList;
     }

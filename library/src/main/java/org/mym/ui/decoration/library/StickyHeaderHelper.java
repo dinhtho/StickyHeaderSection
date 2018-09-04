@@ -34,7 +34,7 @@ public interface StickyHeaderHelper<T extends RecyclerView.ViewHolder> {
      */
     long NO_HEADER = -1L;
 
-    List<? extends Section> getSectionList();
+    List<Section> getSectionList();
 
     void returnItemList(List<?> itemList);
 

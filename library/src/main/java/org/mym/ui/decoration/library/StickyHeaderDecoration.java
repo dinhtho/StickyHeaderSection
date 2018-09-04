@@ -32,7 +32,7 @@ public class StickyHeaderDecoration extends RecyclerView.ItemDecoration {
         mHeaderCache = new LongSparseArray<>();
     }
 
-    private List<Integer> getHeaderIndexes(List<? extends Section> sectionList) {
+    private List<Integer> getHeaderIndexes(List<Section> sectionList) {
         List<Integer> headerList = new ArrayList<>();
         headerList.add(0);
         for (Section s : sectionList) {
@@ -93,7 +93,7 @@ public class StickyHeaderDecoration extends RecyclerView.ItemDecoration {
             if (adapterPos != RecyclerView.NO_POSITION && hasHeader(adapterPos)) {
                 long headerId = getHeaderId(adapterPos);
 
-                if (headerId != previousHeaderId) {
+                if (headerId > previousHeaderId) {
                     View header = getHeader(parent, adapterPos).itemView;
                     canvas.save();
 

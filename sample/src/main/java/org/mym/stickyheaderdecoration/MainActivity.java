@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btChange;
     private MyAdapter mAdapter;
     private StickyHeaderDecoration mDecoration;
-    private List<Section<String, String>> dataList;
+    private List<Section> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

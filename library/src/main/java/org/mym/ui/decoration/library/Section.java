@@ -3,11 +3,11 @@ package org.mym.ui.decoration.library;
 import java.util.List;
 
 public class Section<H, I> {
-    private H Header;
+    private H header;
     private List<I> itemList;
 
     public Section(H header, List<I> itemList) {
-        Header = header;
+        this.header = header;
         this.itemList = itemList;
     }
 
@@ -16,7 +16,7 @@ public class Section<H, I> {
     }
 
     public H getHeader() {
-        return Header;
+        return header;
     }
 
     public List<I> getItemList() {
