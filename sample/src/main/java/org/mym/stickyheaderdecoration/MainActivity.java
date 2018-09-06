@@ -1,16 +1,12 @@
 package org.mym.stickyheaderdecoration;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import org.mym.ui.decoration.library.Section;
 import org.mym.ui.decoration.library.StickyHeaderDecoration;
@@ -23,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button btChange;
     private MyAdapter mAdapter;
-    private StickyHeaderDecoration mDecoration;
     private List<Section> dataList;
 
     @Override
@@ -37,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dataList.remove(0);
-                mAdapter.updateSectionList(dataList, mDecoration);
+                mAdapter.updateSectionList(dataList);
             }
         });
 
@@ -102,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(dataList);
         recyclerView.setAdapter(mAdapter);
 
-        mDecoration = new StickyHeaderDecoration(mAdapter);
+        StickyHeaderDecoration mDecoration = new StickyHeaderDecoration(mAdapter);
         recyclerView.addItemDecoration(mDecoration);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }

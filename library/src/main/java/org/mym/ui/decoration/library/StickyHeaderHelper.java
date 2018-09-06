@@ -38,6 +38,8 @@ public interface StickyHeaderHelper<T extends RecyclerView.ViewHolder> {
 
     void returnItemList(List<?> itemList);
 
+    void setDecoration(StickyHeaderDecoration decoration);
+
     @NonNull
     T onCreateHeaderViewHolder(ViewGroup parent);
 

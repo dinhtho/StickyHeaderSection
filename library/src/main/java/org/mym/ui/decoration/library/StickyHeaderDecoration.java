@@ -19,15 +19,16 @@ public class StickyHeaderDecoration extends RecyclerView.ItemDecoration {
 
     private LongSparseArray<RecyclerView.ViewHolder> mHeaderCache;
 
-    private StickyHeaderHelper mAdapter;
+    private StickyHeaderAdapter mAdapter;
 
     private List<Integer> headerIndexes;
 
     /**
      * @param adapter the sticky header adapter to use
      */
-    public StickyHeaderDecoration(StickyHeaderHelper adapter) {
+    public StickyHeaderDecoration(StickyHeaderAdapter adapter) {
         mAdapter = adapter;
+        mAdapter.setDecoration(this);
         headerIndexes = getHeaderIndexes(adapter.getSectionList());
         mHeaderCache = new LongSparseArray<>();
     }

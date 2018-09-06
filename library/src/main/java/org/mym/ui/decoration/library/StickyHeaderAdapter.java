@@ -11,13 +11,22 @@ public abstract class StickyHeaderAdapter<IH extends RecyclerView.ViewHolder,
 
     private List<?> itemList = new ArrayList<>();
     private List<Section> sectionList = new ArrayList<>();
+    private StickyHeaderDecoration decoration;
+
+    public StickyHeaderDecoration getDecoration() {
+        return decoration;
+    }
+
+    @Override
+    public void setDecoration(StickyHeaderDecoration decoration) {
+        this.decoration = decoration;
+    }
 
     public StickyHeaderAdapter(List<Section> sectionList) {
         updateView(sectionList);
     }
 
-    public void updateSectionList(List<Section> sectionList, StickyHeaderDecoration
-            decoration) {
+    public void updateSectionList(List<Section> sectionList) {
         updateView(sectionList);
         decoration.invalidate();
         notifyDataSetChanged();
