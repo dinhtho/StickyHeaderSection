@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
         StickyHeaderDecoration mDecoration = new StickyHeaderDecoration(mAdapter);
+//        mDecoration.setSticky(false);
         recyclerView.addItemDecoration(mDecoration);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
