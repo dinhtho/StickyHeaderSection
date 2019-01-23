@@ -12,13 +12,18 @@ import org.mym.ui.decoration.library.StickyHeaderAdapter;
 
 import java.util.List;
 
-public class MyAdapter extends StickyHeaderAdapter<MyAdapter.ItemHolder, MyAdapter.HeaderHolder> {
-    private List<?> itemList;
-    private List<Section> sectionList;
+public class MyAdapter extends StickyHeaderAdapter<MyAdapter.ItemHolder, MyAdapter.HeaderHolder, String, String> {
+    private List<String> itemList;
+    private List<Section<String, String>> sectionList;
 
-    public MyAdapter(List<Section> sectionList) {
-        super(sectionList);
-        this.sectionList = sectionList;
+    public MyAdapter(List<Section<String, String>> sections) {
+        super(sections);
+        this.sectionList = sections;
+    }
+
+    @Override
+    public void returnItemList(List<String> itemList) {
+        this.itemList = itemList;
     }
 
     @Override
@@ -30,12 +35,7 @@ public class MyAdapter extends StickyHeaderAdapter<MyAdapter.ItemHolder, MyAdapt
 
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
-        holder.textView.setText(itemList.get(position).toString() + position);
-    }
-
-    @Override
-    public void returnItemList(List<?> itemList) {
-        this.itemList = itemList;
+        holder.textView.setText(itemList.get(position) + position);
     }
 
     @NonNull
@@ -48,7 +48,7 @@ public class MyAdapter extends StickyHeaderAdapter<MyAdapter.ItemHolder, MyAdapt
 
     @Override
     public void onBindHeaderViewHolder(@NonNull HeaderHolder holder, int headerPosition) {
-        holder.textView.setText(sectionList.get(headerPosition).getHeader().toString());
+        holder.textView.setText(sectionList.get(headerPosition).getHeader());
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {

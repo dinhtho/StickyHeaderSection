@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button btChange;
     private MyAdapter mAdapter;
-    private List<Section> dataList;
+    private List<Section<String,String>> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

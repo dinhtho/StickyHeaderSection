@@ -27,16 +27,16 @@ import java.util.List;
  *
  * @param <T> the header view holder
  */
-public interface StickyHeaderHelper<T extends RecyclerView.ViewHolder> {
+public interface StickyHeaderHelper<T extends RecyclerView.ViewHolder,H,I> {
 
     /**
      * Indicate this item has no corresponding header.
      */
     long NO_HEADER = -1L;
 
-    List<Section> getSectionList();
+    List<Section<H,I>> getSections();
 
-    void returnItemList(List<?> itemList);
+    void returnItemList(List<I> itemList);
 
     void setDecoration(StickyHeaderDecoration decoration);
 
